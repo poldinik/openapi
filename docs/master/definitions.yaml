@@ -1,7 +1,7 @@
-#  2019-05-29T23:07:38.517665
+#  2019-05-29T23:13:33.895320
 info:
-  commit: 43e46684393ce048b4c873d55ecfa3832979625f
-  date: 1559171184
+  commit: 89fdc6497fe2b4d6707b62074f40e91e8cb59666
+  date: 1559171527
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
