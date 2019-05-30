@@ -1,7 +1,7 @@
-#  2019-05-30T10:53:23
+#  2019-05-30T11:48:18
 info:
-  commit: 95a5d5bb3329af09ff81d244cdc50123b8119502
-  date: 1559213603
+  commit: 3b506cbe6c0399d30abb96a37fcb573668e84ed8
+  date: 1559216898
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -201,8 +201,9 @@ schemas:
       detail:
         description: |
           A human readable explanation specific to this occurrence of the
-          problem.
-        example: Connection to database timed out
+          problem. You MUST NOT expose internal informations, personal
+          data or implementation details through this field.
+        example: Request took too long to complete.
         type: string
       instance:
         description: |
