@@ -1,7 +1,7 @@
-#  2019-05-30T17:50:41
+#  2019-08-21T08:15:02
 info:
-  commit: c449f934b59d08dac1c6bcc43e70c95691904472
-  date: 1559238641
+  commit: 1b2dabf094de6786313cab9276ade7dae0d65fa8
+  date: 1566375302
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -161,12 +161,76 @@ responses:
           $ref: '#/schemas/Problem'
     description: Unexpected error
 schemas:
+  Coordinates:
+    description: |-
+      Geographic coordinates of a point. The names "lat" and "long" are inherited from the clvapit.
+      Example URL: http://dati.beniculturali.it/lodview/mibact/luoghi/resource/Geometry/Coordinate_geografiche_della_sede_di_Gallerie_degli_Uffizi_-_Corridoio_Vasariano_20440.html
+    properties:
+      lat:
+        $ref: '#/schemas/Latitude'
+      long:
+        $ref: '#/schemas/Longitude'
+    required:
+    - lat
+    - long
   CurrencyCode:
     description: |
       Specifies the currency of the amount or of the account.
       A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
     example: EUR
     pattern: ^[A-Z]{3,3}$
+    type: string
+  Latitude:
+    description: |-
+      Latitude of a point expressed in:
+
+      * the ETRS89 system for Italian and European territories
+      * and in WGS84 for the others.
+    example: 45.492599
+    externalDocs:
+      url: http://dati.gov.it/onto/clvapit#long
+    format: double
+    maximum: 90
+    minimum: -90
+    type: number
+  LatitudeString:
+    description: |-
+      Latitude of a point expressed in:
+
+      * the ETRS89 system for Italian and European territories
+      * and in WGS84 for the others.
+
+      Value is serialized as a string. The associated numeric value must be
+      between -90 and 90.
+
+      The string value is safe from floating-point aritmetic errors.
+    example: '45.492599412312331'
+    type: string
+  Longitude:
+    description: |-
+      Longitude of a point expressed in:
+
+      * the ETRS89 system for Italian and European territories
+      * and in WGS84 for the others.
+    example: 9.19289
+    externalDocs:
+      url: http://dati.gov.it/onto/clvapit#long
+    format: double
+    maximum: 180
+    minimum: -180
+    type: number
+  LongitudeString:
+    description: |-
+      Latitude of a point expressed in:
+
+      * the ETRS89 system for Italian and European territories
+      * and in WGS84 for the others.
+
+      Value is serialized as a string. The associated numeric value must be
+      between -180 and 180.
+
+      The string value is safe from floating-point aritmetic errors.
+    example: '9.192894141231231'
     type: string
   Money:
     description: |
