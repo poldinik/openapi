@@ -1,7 +1,7 @@
-#  2019-10-17T13:12:23
+#  2019-10-18T07:42:41
 info:
-  commit: 333f233282b2ad90f6fd7018575298e128ffaf8e
-  date: 1571317943
+  commit: 66c61a37b2a6dc99b901e08a01b97335933c8c36
+  date: 1571384561
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -9,6 +9,17 @@ info:
     The work is ongoing, your feedback is greatly appreciated!
   version: master
 headers:
+  Location:
+    description: |-
+      In some responses, this header references the
+      primary resource created.
+
+      It is used for redirections too.
+
+      See https://tools.ietf.org/html/rfc7231#section-7.1.2
+    schema:
+      format: url
+      type: string
   Retry-After:
     description: |-
       Retry contacting the endpoint *at least* after seconds.
