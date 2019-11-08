@@ -1,7 +1,7 @@
-#  2019-10-18T11:54:38
+#  2019-11-08T10:43:35
 info:
-  commit: d0109e951cf82d7b1e4e0d56b38a6d818fb0345e
-  date: 1571399678
+  commit: f6a7dc50c0a0864bfc140fe50fb3a135ee8a68cd
+  date: 1573209815
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -27,6 +27,17 @@ headers:
     schema:
       format: int32
       type: integer
+  Sunset:
+    description: The Sunset HTTP response header field, indicates that a URI is likely
+      to become unresponsive at a specified point in the future.  It also defines
+      a sunset link relation type that allows linking to resources providing information
+      about an upcoming resource or service sunset.
+    schema:
+      example: Sun, 06 Nov 1994 08:49:37 GMT
+      externalDocs:
+        url: https://tools.ietf.org/html/rfc7231#appendix-D
+      format: HTTP-date
+      type: string
   X-RateLimit-Limit:
     description: The number of allowed requests in the current period
     schema:
