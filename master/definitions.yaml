@@ -1,7 +1,7 @@
-#  2019-11-08T10:43:35
+#  2019-11-11T09:21:27
 info:
-  commit: f6a7dc50c0a0864bfc140fe50fb3a135ee8a68cd
-  date: 1573209815
+  commit: b3fb3f4f5f6f372313850ef41349532433a98ee1
+  date: 1573464087
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -183,6 +183,12 @@ responses:
           $ref: '#/schemas/Problem'
     description: Unexpected error
 schemas:
+  Amount:
+    description: |
+      ISO20022: Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+    example: '12.25'
+    pattern: ^\-{0,1}[0-9]{1,13}(\.[0-9]{0,5}){0,1}$
+    type: string
   Coordinates:
     description: |-
       Geographic coordinates of a point. The names "lat" and "long" are inherited from the clvapit.
@@ -262,10 +268,7 @@ schemas:
       currency: EUR
     properties:
       amount:
-        description: |
-          ISO20022: Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
-        pattern: ^\-{0,1}[0-9]{1,13}(\.[0-9]{0,5}){0,1}$
-        type: string
+        $ref: '#/schemas/Amount'
       currency:
         $ref: '#/schemas/CurrencyCode'
     required:
