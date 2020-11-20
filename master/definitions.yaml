@@ -1,7 +1,7 @@
-#  2019-12-13T19:54:57
+#  2020-11-20T17:53:55
 info:
-  commit: f2a076f998f0e6aa26da2de656cd762075e188e5
-  date: 1576266897
+  commit: 5816eb9f19b5af0ec5ef9e9665c0595b80f0f90f
+  date: 1605894835
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -293,12 +293,14 @@ schemas:
           problem. You MUST NOT expose internal informations, personal
           data or implementation details through this field.
         example: Request took too long to complete.
+        maxLength: 1024
         type: string
       instance:
         description: |
           An absolute URI that identifies the specific occurrence of the problem.
           It may or may not yield further information if dereferenced.
         format: uri
+        maxLength: 8000
         type: string
       status:
         description: |
@@ -315,6 +317,7 @@ schemas:
           A short, summary of the problem type. Written in english and readable
           for engineers (usually not suited for non technical stakeholders and
           not localized); example: Service Unavailable
+        maxLength: 128
         type: string
       type:
         default: about:blank
@@ -324,6 +327,7 @@ schemas:
           (e.g., using HTML).
         example: https://tools.ietf.org/html/rfc7231#section-6.6.4
         format: uri
+        maxLength: 8000
         type: string
     type: object
   TaxCode:
