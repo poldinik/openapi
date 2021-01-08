@@ -1,7 +1,7 @@
-#  2021-01-08T22:45:44
+#  2021-01-08T22:49:47
 info:
-  commit: f78427401dbe24f8d74910d8497d66ed82d2c9d3
-  date: 1610145944
+  commit: 2809cd222645fa6090eff60dd1e889cbb4d70648
+  date: 1610146187
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -19,6 +19,7 @@ headers:
       See https://tools.ietf.org/html/rfc7231#section-7.1.2
     schema:
       format: url
+      maxLength: 4096
       type: string
   Retry-After:
     description: |-
@@ -26,6 +27,8 @@ headers:
       See https://tools.ietf.org/html/rfc7231#section-7.1.3
     schema:
       format: int32
+      maximum: 186400
+      minimum: 0
       type: integer
   Sunset:
     description: The Sunset HTTP response header field, indicates that a URI is likely
@@ -37,21 +40,28 @@ headers:
       externalDocs:
         url: https://tools.ietf.org/html/rfc7231#appendix-D
       format: HTTP-date
+      maxLength: 30
       type: string
   X-RateLimit-Limit:
     description: The number of allowed requests in the current period
     schema:
       format: int32
+      maximum: 1000000
+      minimum: 0
       type: integer
   X-RateLimit-Remaining:
     description: The number of remaining requests in the current period
     schema:
       format: int32
+      maximum: 1000000
+      minimum: 0
       type: integer
   X-RateLimit-Reset:
     description: The number of seconds left in the current period
     schema:
       format: int32
+      maximum: 186400
+      minimum: 0
       type: integer
 parameters:
   Etag:
@@ -66,6 +76,7 @@ parameters:
     name: Etag
     required: false
     schema:
+      maxLength: 1024
       type: string
   IfMatch:
     description: |
@@ -79,6 +90,7 @@ parameters:
     name: If-Match
     required: false
     schema:
+      maxLength: 1024
       type: string
   IfNoneMatch:
     description: |
@@ -91,6 +103,7 @@ parameters:
     name: If-None-Match
     required: false
     schema:
+      maxLength: 1024
       type: string
   citizen:
     description: testme
@@ -104,12 +117,14 @@ parameters:
     in: query
     name: cursor
     schema:
+      maxLength: 1024
       type: string
   fields:
     description: Fields to retrieve
     in: query
     name: fields
     schema:
+      maxLength: 4096
       type: string
   limit:
     description: How many items to return at one time (max 100)
@@ -117,6 +132,8 @@ parameters:
     name: limit
     schema:
       format: int32
+      maximum: 100
+      minimum: 0
       type: integer
   offset:
     description: The zero-ary offset index into the results
@@ -125,12 +142,15 @@ parameters:
     schema:
       default: 0
       format: int32
+      maximum: 1e10
+      minimum: 0
       type: integer
   q:
     description: Search query term
     in: query
     name: q
     schema:
+      maxLength: 2048
       type: string
   sort:
     description: Sorting order
@@ -138,6 +158,7 @@ parameters:
     name: sort
     schema:
       example: +name
+      maxLength: 1024
       type: string
 responses:
   400BadRequest:
@@ -187,6 +208,8 @@ schemas:
     description: |
       ISO20022: Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
     example: '12.25'
+    maxLength: 35
+    minLength: 1
     pattern: ^\-{0,1}[0-9]{1,13}(\.[0-9]{0,5}){0,1}$
     type: string
   Coordinates:
@@ -206,6 +229,7 @@ schemas:
       Specifies the currency of the amount or of the account.
       A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
     example: EUR
+    maxLength: 3
     pattern: ^[A-Z]{3,3}$
     type: string
   Latitude:
@@ -238,16 +262,21 @@ schemas:
     properties:
       city:
         description: https://w3id.org/italia/onto/CLV/City
+        maxLength: 128
         type: string
       country:
         description: https://w3id.org/italia/onto/CLV/Country
+        maxLength: 128
         type: string
       province:
         description: https://w3id.org/italia/onto/CLV/Province
+        maxLength: 128
         type: string
       region:
+        maxLength: 128
         type: string
       zip_code:
+        maxLength: 6
         type: string
   Longitude:
     description: |-
@@ -297,17 +326,29 @@ schemas:
       birth_place:
         $ref: '#/schemas/Location'
       date_of_birth:
-        formta: date
+        format: date
         type: string
       family_name:
+        maxLength: 255
         type: string
       given_name:
+        maxLength: 255
         type: string
       residence:
         $ref: '#/schemas/Location'
       tax_code:
         $ref: '#/schemas/TaxCode'
   Problem:
+    additionalProperties: false
+    description: |-
+      This schema describes RFC7807 Problem Details for HTTP APIs.
+      The specification is intentionally flexible, and allows to adapt
+      the schema adding further properties, or not enforcing any of the properties
+      below.
+
+      To make this schema safe by default, additionalProperties are forbidden though.
+      In case you need them, you can either re-define Problem or extend it
+      using `allOf`.
     properties:
       detail:
         description: |
@@ -349,7 +390,7 @@ schemas:
           (e.g., using HTML).
         example: https://tools.ietf.org/html/rfc7231#section-6.6.4
         format: uri
-        maxLength: 8000
+        maxLength: 2048
         type: string
     type: object
   TaxCode:
@@ -357,5 +398,7 @@ schemas:
     example: RSSMRA75L01H501A
     externalDocs:
       url: https://w3id.org/italia/onto/CPV/taxCode
+    maxLength: 16
+    minLength: 11
     pattern: /^(?:(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i
     type: string
