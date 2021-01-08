@@ -1,7 +1,7 @@
-#  2021-01-08T22:49:47
+#  2021-01-08T23:22:05
 info:
-  commit: 2809cd222645fa6090eff60dd1e889cbb4d70648
-  date: 1610146187
+  commit: d5b01afc1e71929f2a2f05eaa943b1d2d8192a8b
+  date: 1610148125
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -355,15 +355,18 @@ schemas:
           A human readable explanation specific to this occurrence of the
           problem. You MUST NOT expose internal informations, personal
           data or implementation details through this field.
+
+          `detail` supports unicode characters, expressed ad \X in the pattern.
         example: Request took too long to complete.
-        maxLength: 1024
+        maxLength: 4096
+        pattern: ^\X{1024}$
         type: string
       instance:
         description: |
           An absolute URI that identifies the specific occurrence of the problem.
           It may or may not yield further information if dereferenced.
         format: uri
-        maxLength: 8000
+        maxLength: 2048
         type: string
       status:
         description: |
@@ -379,8 +382,10 @@ schemas:
         description: |
           A short, summary of the problem type. Written in english and readable
           for engineers (usually not suited for non technical stakeholders and
-          not localized); example: Service Unavailable
-        maxLength: 128
+          not localized): the expressed pattern does not support unicode characters.
+        example: Service Unavailable
+        maxLength: 64
+        pattern: ^\w{64}$
         type: string
       type:
         default: about:blank
