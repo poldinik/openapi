@@ -1,7 +1,7 @@
-#  2021-01-08T23:22:05
+#  2021-01-08T23:43:13
 info:
-  commit: d5b01afc1e71929f2a2f05eaa943b1d2d8192a8b
-  date: 1610148125
+  commit: 72b0495a06e5ed3c34e8e95d01d79f6ba99ae417
+  date: 1610149393
   description: |-
     OpenAPI 3 templates and definitions for implementing
     interoperable APIs.
@@ -359,7 +359,7 @@ schemas:
           `detail` supports unicode characters, expressed ad \X in the pattern.
         example: Request took too long to complete.
         maxLength: 4096
-        pattern: ^\X{1024}$
+        pattern: ^\X{0,1024}$
         type: string
       instance:
         description: |
@@ -385,7 +385,7 @@ schemas:
           not localized): the expressed pattern does not support unicode characters.
         example: Service Unavailable
         maxLength: 64
-        pattern: ^\w{64}$
+        pattern: ^[ -~]{0,64}$
         type: string
       type:
         default: about:blank
